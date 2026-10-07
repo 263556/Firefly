@@ -42,21 +42,20 @@ const pages = resolvePageToggles({
 
 export const siteConfig: SiteConfig = {
 	// 站点标题
-	title: "Firefly",
+	title: "小螺号",
 
 	// 站点副标题
-	subtitle: "Demo site",
+	subtitle: "LittleTrumpet",
 
 	// 站点 URL
-	site_url: "https://firefly.cuteleaf.cn",
+	site_url: "https://16888000.xyz",
 
 	// 站点描述
 	description:
-		"Firefly 是一款基于 Astro 框架和 Fuwari 模板开发的清新美观且现代化个人博客主题模板，专为技术爱好者和内容创作者设计。该主题融合了现代 Web 技术栈，提供了丰富的功能模块和高度可定制的界面，让您能够轻松打造出专业且美观的个人博客网站。",
-
+		"记录科学，欢迎观看一名工科生的成长日记！",
 	// 站点关键词
 	keywords: [
-		"Firefly",
+		"LittleTrumpet",
 		"Fuwari",
 		"Astro",
 		"ACGN",
@@ -68,7 +67,7 @@ export const siteConfig: SiteConfig = {
 	// 主题色
 	themeColor: {
 		// 主题色的默认色相，范围从 0 到 360。例如：红色：0，青色：200，蓝绿色：250，粉色：345
-		hue: 165,
+		hue: 345,
 		// 默认模式："light" 亮色，"dark" 暗色，"system" 跟随系统
 		defaultMode: "system",
 	},
@@ -81,7 +80,7 @@ export const siteConfig: SiteConfig = {
 	// 网站Card样式配置
 	card: {
 		// 是否开启卡片边框和阴影，开启后让网站更有立体感
-		border: false,
+		border: true,
 		// 是否让卡片风格跟随主题色相
 		followTheme: false,
 	},
@@ -92,10 +91,17 @@ export const siteConfig: SiteConfig = {
 		{
 			// 图标文件路径
 			src: "/favicon/firefly-32.png",
+			theme:"light",
+			sizes:"32x32",
 			// 可选，指定主题 'light' | 'dark'
 			// theme: "light",
 			// 可选，图标大小
 			// sizes: "32x32",
+		},
+		{
+			src: "/favicon/firefly-32.png",
+			theme:"dark",
+			sizes:"32x32",
 		},
 	],
 
@@ -117,7 +123,7 @@ export const siteConfig: SiteConfig = {
 			alt: "🍀",
 		},
 		// 导航栏标题
-		title: "Firefly Blog",
+		title: "小螺号",
 		// 全宽导航栏，导航栏是否占满屏幕宽度
 		widthFull: false,
 		// 导航菜单对齐方式，left：左对齐，center：居中
@@ -132,7 +138,7 @@ export const siteConfig: SiteConfig = {
 	},
 
 	// 站点开始日期，用于统计运行天数
-	siteStartDate: "2025-01-01",
+	siteStartDate: "2026-10-06",
 
 	// 站点时区（IANA 时区字符串），用于格式化bangumi、rss里的构建日期时间等等..
 	// 示例："Asia/Shanghai", "UTC", 如果为空，则按照构建服务器的时区进行时区转换
@@ -235,7 +241,7 @@ export const siteConfig: SiteConfig = {
 		// 文章页底部的"上次编辑时间"卡片开关
 		showLastModified: true,
 		// 文章过期阈值（天数），超过此天数才显示"上次编辑"卡片
-		outdatedThreshold: 30,
+		outdatedThreshold: 120,
 		// 是否显示文章页的分享按钮
 		share: true,
 		// 是否显示上一篇/下一篇文章导航
@@ -243,7 +249,7 @@ export const siteConfig: SiteConfig = {
 		// 是否显示相关文章推荐
 		relatedPosts: true,
 		// 是否显示随机文章推荐
-		randomPosts: true,
+		randomPosts: false,
 		// OpenGraph图片功能，注意开启后要渲染很长时间，不建议本地调试的时候开启
 		generateOgImages: true,
 		// 沉浸阅读配置：电脑端文章详情页右下角按钮，进入后只留文章卡片+左侧目录
@@ -255,75 +261,75 @@ export const siteConfig: SiteConfig = {
 			// 沉浸阅读中是否显示目录栏
 			tocEnabled: true,
 			// 目录栏位置："left" | "right"
-			tocPosition: "left",
+			tocPosition: "right",
 		},
 	},
 
 	// ── Bilibili配置 ──────────────────────────────────
 	bilibili: {
 		// 你的 Bilibili 用户 UID
-		uid: "38932988",
+		uid: "3493094712412650",
 	},
 
 	// ── 番组计划bangumi配置 ──────────────────────────────────
-	bangumi: {
-		// Bangumi用户ID
-		userId: "1143164",
-		// 数据模式：static=构建时获取，dynamic=客户端实时获取
-		// static 模式在构建时获取数据并静态渲染，部署后数据不更新
-		// dynamic 模式在浏览器中实时请求 API，始终显示最新数据
-		mode: "dynamic",
+	//bangumi: {
+	//	// Bangumi用户ID
+	//	userId: "1143164",
+	//	// 数据模式：static=构建时获取，dynamic=客户端实时获取
+	//	// static 模式在构建时获取数据并静态渲染，部署后数据不更新
+	//	// dynamic 模式在浏览器中实时请求 API，始终显示最新数据
+	//	mode: "dynamic",
 		// Bangumi API 地址
-		apiUrl: "https://api.bangumi.pro",
+	//	apiUrl: "https://api.bangumi.pro",
 		// 详情页地址
-		subjectBaseUrl: "https://api.bangumi.pro/subject/",
+	//	subjectBaseUrl: "https://api.bangumi.pro/subject/",
 		// 条目类型排序，数组中的类型将按顺序优先展示
 		// 可选值: "anime" | "book" | "music" | "game" | "real" (暂不支持"real"类型)
 		// 未列出的类型将按默认顺序排在后面
-		categoryOrder: ["anime", "book", "music", "game"],
+	//	categoryOrder: ["anime", "book", "music", "game"],
 		// 控制各分类的启用状态（true/false），未指定的分类默认启用
 		// categories: {
 		// 	game: false, // 禁用游戏分类显示
 		// },
 		// NSFW 处理："off" 不过滤 | "blur" 仅模糊封面 | "hide" 隐藏条目
-		nsfw: "hide",
-	},
+	//	nsfw: "hide",
+	//},
 
 	// ── VNDB配置 ──────────────────────────────────
-	vndb: {
+	//vndb: {
 		// VNDB 用户 ID
-		userId: "u358128",
+	//	userId: "u358128",
 		// 数据模式：static=构建时获取，dynamic=客户端实时获取
 		// static 模式在构建时获取数据并静态渲染，部署后数据不更新
 		// dynamic 模式在浏览器中实时请求 API，始终显示最新数据
-		mode: "static",
+	//	mode: "static",
 		// 构建时下载并压缩封面到 public/vndb-covers，图片由本站服务器提供
-		downloadCovers: false,
+	//	downloadCovers: false,
 		// VNDB API 地址
-		apiUrl: "https://api.vndb.org/kana",
+	//	apiUrl: "https://api.vndb.org/kana",
 		// 条目详情页地址，末尾需要带 /
-		vnBaseUrl: "https://vndb.org/",
+	//	vnBaseUrl: "https://vndb.org/",
 		// 私密列表访问令牌，仅 static 模式下使用；不要把真实令牌提交到公开仓库！
-		apiToken: "",
+	//	apiToken: "",
 		// NSFW 处理："off" 不过滤 | "blur" 仅模糊封面 | "hide" 隐藏条目
-		nsfw: "hide",
-	},
+	//	nsfw: "hide",
+	//},
 
 	// ── MyAnimeList配置 ──────────────────────────────────
-	mal: {
+	//mal: {
 		// MyAnimeList 用户名（列表需为公开状态，私密列表无法读取）
-		username: "cuteleaf",
+	//	username: "cuteleaf",
 		// MyAnimeList Client ID，在 https://myanimelist.net/apiconfig 注册免费应用后获取
-		clientId: "	0ef34371450f9c6c809deaadec6aa8f3",
+	//	clientId: "	0ef34371450f9c6c809deaadec6aa8f3",
 		// MAL API 地址
-		apiUrl: "https://api.myanimelist.net/v2",
+	//	apiUrl: "https://api.myanimelist.net/v2",
 		// 动画条目详情页地址，末尾需要带 /
-		animeBaseUrl: "https://myanimelist.net/anime/",
+	//	animeBaseUrl: "https://myanimelist.net/anime/",
 		// 漫画条目详情页地址，末尾需要带 /
-		mangaBaseUrl: "https://myanimelist.net/manga/",
+	//	mangaBaseUrl: "https://myanimelist.net/manga/",
 		// NSFW 处理："off" 不过滤 | "blur" 仅模糊封面 | "hide" 隐藏条目
-		nsfw: "hide",
-	},
+	//	nsfw: "hide",
+	//},
 
 	// ── 图像优化配置 ──────────────────────────────────
 	// 图像优化压缩只保留avif或webp
@@ -344,8 +350,8 @@ export const siteConfig: SiteConfig = {
 		noReferrerDomains: [
 			"*.hdslb.com",
 			"*.bilibili.com",
-			"*.myanimelist.net",
-			"*.vndb.org",
+			//"*.myanimelist.net",
+			//"*.vndb.org",
 		],
 	},
 
