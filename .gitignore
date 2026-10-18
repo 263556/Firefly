@@ -47,3 +47,6 @@ package/
 .codex*
 .claude
 .mimocode
+
+# 备份文件
+*.bak
