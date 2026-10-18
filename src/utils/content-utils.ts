@@ -1,4 +1,5 @@
 import { type CollectionEntry, getCollection } from "astro:content";
+import { siteConfig } from "@/config";
 import I18nKey from "@i18n/i18nKey";
 import { i18n } from "@i18n/translation";
 import { getCategoryUrl } from "@utils/url-utils";
@@ -203,9 +204,26 @@ export async function getCategoryList(): Promise<Category[]> {
 		count[categoryName] = count[categoryName] ? count[categoryName] + 1 : 1;
 	});
 
+	// 合并预置分类：没有文章的预置分类也展示（计数为 0）
+	const presetOrder = new Map<string, number>();
+	for (const [index, preset] of (siteConfig.predefinedCategories ?? []).entries()) {
+		presetOrder.set(preset.trim(), index);
+	}
+	for (const preset of siteConfig.predefinedCategories ?? []) {
+		const presetName = preset.trim();
+		if (presetName && !(presetName in count)) {
+			count[presetName] = 0;
+		}
+	}
+
+	const presetRank = (name: string) =>
+		presetOrder.has(name) ? (presetOrder.get(name) as number) : Number.MAX_SAFE_INTEGER;
+
 	const lst = Object.keys(count).sort((a, b) => {
 		return (
-			count[b] - count[a] || a.toLowerCase().localeCompare(b.toLowerCase())
+			count[b] - count[a] ||
+			presetRank(a) - presetRank(b) ||
+			a.toLowerCase().localeCompare(b.toLowerCase())
 		);
 	});
 

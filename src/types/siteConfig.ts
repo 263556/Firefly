@@ -105,6 +105,9 @@ export type SiteConfig = {
 	// 分类导航栏按钮样式："pill"=胶囊，"rectangle"=矩形（配色同胶囊）
 	categoryStyle?: "pill" | "rectangle";
 
+	// 预置分类：即使该分类下暂无文章，也会出现在分类页、侧边栏分类和分类导航栏
+	predefinedCategories?: string[];
+
 	// 标签样式："pill"=主题色胶囊，"pill-gray"=中性灰胶囊，"rectangle"=主题色矩形
 	tagStyle?: "pill" | "pill-gray" | "rectangle";
 

@@ -154,6 +154,10 @@ export const siteConfig: SiteConfig = {
 	// "rectangle"：矩形，配色同胶囊，仅圆角更小
 	categoryStyle: "rectangle",
 
+	// 预置分类：即使分类下暂无文章，也会出现在分类页、侧边栏分类和首页分类导航栏
+	// 写文章时在 frontmatter 的 category 字段填下面的名字即可归入对应分类
+	predefinedCategories: ["C语言", "C++", "Python", "日常"],
+
 	// 标签样式，作用于文章列表底部标签、标签页和侧边栏标签
 	// "pill"：胶囊，主题色底圆角
 	// "pill-gray"：胶囊，中性灰底圆角

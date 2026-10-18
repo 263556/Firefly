@@ -2,7 +2,7 @@
 title: 我的第一篇文章
 published: 2026-10-10
 tags: ["分享"]
-categories: 学习
+category: C语言
 cover: "" # 可以填入图片路径或URL
 description: 扫雷游戏的分享（C语言）
 draft: false
