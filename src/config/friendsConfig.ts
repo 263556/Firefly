@@ -24,9 +24,8 @@ export const friendsPageConfig: FriendsPageConfig = {
 export const friendsConfig: FriendLink[] = [
 	{
 		title: "小螺号",
-		imgurl:
-			"https://weavatar.com/avatar/d252655d40d6874417a720bad0a6c5f77f8f6a1fd2f882f8f338402dc37e4190?s=640",
-		desc: "自由与风，热爱世间万物，无最爱，无例外。",
+		imgurl: "https://16888000.xyz/avatar.png",
+		desc: "记录科学，欢迎观看一名工科生的成长日记！",
 		siteurl: "https://16888000.xyz",
 		tags: ["Blog"],
 		weight: 10, // 权重，数字越大排序越靠前
