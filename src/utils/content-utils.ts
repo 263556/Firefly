@@ -4,7 +4,25 @@ import I18nKey from "@i18n/i18nKey";
 import { i18n } from "@i18n/translation";
 import { getCategoryUrl } from "@utils/url-utils";
 
-// // Retrieve posts and sort them by publication date
+// 同日文章按系列分组，系列内按章节升序；其他文章使用稳定的 ID 兜底。
+export function comparePostsByDate(a: PostForList, b: PostForList): number {
+	const dateDifference =
+		b.data.published.getTime() - a.data.published.getTime();
+	if (dateDifference !== 0) return dateDifference;
+
+	const seriesA = a.data.series.trim();
+	const seriesB = b.data.series.trim();
+	const groupA = seriesA ? `series:${seriesA}` : `post:${a.id}`;
+	const groupB = seriesB ? `series:${seriesB}` : `post:${b.id}`;
+	const groupDifference = groupA.localeCompare(groupB);
+	if (groupDifference !== 0) return groupDifference;
+	if (seriesA && seriesA === seriesB) {
+		const orderDifference = sortBySeriesOrder(a, b);
+		if (orderDifference !== 0) return orderDifference;
+	}
+	return a.id.localeCompare(b.id);
+}
+
 async function getRawSortedPosts() {
 	const allBlogPosts = await getCollection("posts", ({ data }) => {
 		return import.meta.env.PROD ? data.draft !== true : true;
@@ -15,10 +33,7 @@ async function getRawSortedPosts() {
 		if (a.data.pinned && !b.data.pinned) return -1;
 		if (!a.data.pinned && b.data.pinned) return 1;
 
-		// 如果置顶状态相同，则按发布日期排序
-		const dateA = new Date(a.data.published);
-		const dateB = new Date(b.data.published);
-		return dateA > dateB ? -1 : 1;
+		return comparePostsByDate(a, b);
 	});
 	return sorted;
 }
@@ -33,6 +48,25 @@ export async function getSortedPosts(): Promise<CollectionEntry<"posts">[]> {
 	for (let i = 0; i < sorted.length - 1; i++) {
 		sorted[i].data.prevSlug = sorted[i + 1].id;
 		sorted[i].data.prevTitle = sorted[i + 1].data.title;
+	}
+
+	// 系列阅读导航遵循章节顺序，与首页的发布时间方向无关。
+	const seriesGroups = new Map<string, CollectionEntry<"posts">[]>();
+	for (const post of sorted) {
+		const name = post.data.series.trim();
+		if (!name) continue;
+		if (!seriesGroups.has(name)) seriesGroups.set(name, []);
+		seriesGroups.get(name)?.push(post);
+	}
+	for (const posts of seriesGroups.values()) {
+		posts.sort(sortBySeriesOrder);
+		for (let i = 0; i < posts.length; i++) {
+			// 现有模板用 next 显示左侧链接、prev 显示右侧链接。
+			posts[i].data.nextSlug = posts[i - 1]?.id ?? "";
+			posts[i].data.nextTitle = posts[i - 1]?.data.title ?? "";
+			posts[i].data.prevSlug = posts[i + 1]?.id ?? "";
+			posts[i].data.prevTitle = posts[i + 1]?.data.title ?? "";
+		}
 	}
 
 	return sorted;

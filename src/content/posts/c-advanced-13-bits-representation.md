@@ -4,7 +4,7 @@ published: 2026-11-14
 description: 从权限开关和字节观察理解整数表示，推导进制转换、补码、大小端、移位与位运算，并实现二进制位计数。
 tags: [C语言, 进阶, 位运算]
 category: C语言
-series: C语言进阶笔记
+series: C语言学习笔记
 seriesOrder: 13
 draft: false
 ---

@@ -4,7 +4,7 @@ published: 2026-11-14
 description: 用学生记录理解结构体声明、变量初始化、整体赋值、点与箭头、值传参与指针传参，并完成成绩统计案例。
 tags: [C语言, 初阶, 结构体]
 category: C语言
-series: C语言初阶笔记
+series: C语言学习笔记
 seriesOrder: 12
 draft: false
 ---

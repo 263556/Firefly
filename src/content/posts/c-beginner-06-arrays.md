@@ -4,7 +4,7 @@ published: 2026-11-14
 description: 用成绩统计、二分查找和棋盘理解数组，梳理初始化、遍历、内存布局、字符串终止符、sizeof 与 strlen、变长数组。
 tags: [C语言, 初阶, 数组]
 category: C语言
-series: C语言初阶笔记
+series: C语言学习笔记
 seriesOrder: 6
 draft: false
 ---

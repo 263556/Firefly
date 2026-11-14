@@ -4,7 +4,7 @@ published: 2026-11-14
 description: 理解 rand、srand、time 和随机范围，完成支持菜单、次数限制、输入检查与计时的猜数字游戏。
 tags: [C语言, 初阶, 猜数字, 项目实践]
 category: C语言
-series: C语言初阶笔记
+series: C语言学习笔记
 seriesOrder: 5
 draft: false
 ---

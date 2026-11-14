@@ -4,7 +4,7 @@ published: 2026-11-14
 description: 系统梳理字符分类、字符串复制拼接比较、格式化、查找分割与错误信息，并实现安全复制和命令行待办事项。
 tags: [C语言, 进阶, 字符串, 标准库]
 category: C语言
-series: C语言进阶笔记
+series: C语言学习笔记
 seriesOrder: 18
 draft: false
 ---

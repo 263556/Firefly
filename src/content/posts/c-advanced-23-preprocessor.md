@@ -4,7 +4,7 @@ published: 2026-11-14
 description: 从平方宏的错误展开出发，理解括号、副作用、预定义符号、头文件保护、字符串化与记号拼接，实践多版本计算器。
 tags: [C语言, 进阶, 预处理, 宏]
 category: C语言
-series: C语言进阶笔记
+series: C语言学习笔记
 seriesOrder: 23
 draft: false
 ---

@@ -4,7 +4,7 @@ published: 2026-11-14
 description: 用数组复制和删除元素理解按字节操作，推导重叠拷贝方向，模拟内存函数并区分对象值与字节表示。
 tags: [C语言, 进阶, 内存函数]
 category: C语言
-series: C语言进阶笔记
+series: C语言学习笔记
 seriesOrder: 19
 draft: false
 ---

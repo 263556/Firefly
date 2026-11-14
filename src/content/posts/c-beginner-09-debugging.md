@@ -4,7 +4,7 @@ published: 2026-11-14
 description: 用阶乘和错误与数组越界案例练习断点、单步、监视、条件断点和内存观察，建立可复现的排错流程。
 tags: [C语言, 初阶, 调试]
 category: C语言
-series: C语言初阶笔记
+series: C语言学习笔记
 seriesOrder: 9
 draft: false
 ---

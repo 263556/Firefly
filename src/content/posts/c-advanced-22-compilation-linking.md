@@ -4,7 +4,7 @@ published: 2026-11-14
 description: 用三文件工程实际观察预处理、编译、汇编、符号解析与重定位，区分声明和定义、静态和动态链接以及程序运行阶段。
 tags: [C语言, 进阶, 编译, 链接]
 category: C语言
-series: C语言进阶笔记
+series: C语言学习笔记
 seriesOrder: 22
 draft: false
 ---

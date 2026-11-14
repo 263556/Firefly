@@ -4,7 +4,7 @@ published: 2026-11-14
 description: 从对象创建与销毁建立指针接口契约，区分 NULL 与有效地址、断言与运行时错误处理，实践 const 和失败清理。
 tags: [C语言, 进阶, 指针, 代码规范]
 category: C语言
-series: C语言进阶笔记
+series: C语言学习笔记
 seriesOrder: 17
 draft: false
 ---

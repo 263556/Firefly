@@ -4,7 +4,7 @@ published: 2026-11-14
 description: 从均分账单和拆数字入手，理解整数除法、赋值、自增、优先级、类型转换和未定义行为。
 tags: [C语言, 初阶, 操作符]
 category: C语言
-series: C语言初阶笔记
+series: C语言学习笔记
 seriesOrder: 3
 draft: false
 ---

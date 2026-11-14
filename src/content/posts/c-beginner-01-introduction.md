@@ -4,7 +4,7 @@ published: 2026-11-14
 description: 从 Hello C 入手，理解编译链接、开发工具、main 函数、输入输出和基本代码规范。
 tags: [C语言, 初阶, 编程入门]
 category: C语言
-series: C语言初阶笔记
+series: C语言学习笔记
 seriesOrder: 1
 draft: false
 ---

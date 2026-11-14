@@ -4,7 +4,7 @@ published: 2026-11-14
 description: 从排序和二维成绩表理解数组退化，区分数组指针与指针数组，推导步长、sizeof、字符串指针和多级指针表达式。
 tags: [C语言, 进阶, 数组, 指针]
 category: C语言
-series: C语言进阶笔记
+series: C语言学习笔记
 seriesOrder: 14
 draft: false
 ---

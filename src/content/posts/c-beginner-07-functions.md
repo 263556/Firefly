@@ -4,7 +4,7 @@ published: 2026-11-14
 description: 用素数判断和数组统计理解接口设计，掌握库函数、实参与形参、返回值、数组传参、声明定义、static 与 extern。
 tags: [C语言, 初阶, 函数]
 category: C语言
-series: C语言初阶笔记
+series: C语言学习笔记
 seriesOrder: 7
 draft: false
 ---

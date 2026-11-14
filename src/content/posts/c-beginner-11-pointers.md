@@ -4,7 +4,7 @@ published: 2026-11-14
 description: 通过交换变量、遍历数组与字符串长度理解指针，梳理解引用、指针大小、void 指针、运算边界和二级指针。
 tags: [C语言, 初阶, 指针]
 category: C语言
-series: C语言初阶笔记
+series: C语言学习笔记
 seriesOrder: 11
 draft: false
 ---

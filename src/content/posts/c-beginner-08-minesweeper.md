@@ -4,7 +4,7 @@ published: 2026-11-14
 description: 完整实现基础扫雷，讲清双棋盘、边界填充、布雷去重、邻雷统计、胜负计数和三文件工程。
 tags: [C语言, 初阶, 扫雷, 项目实践]
 category: C语言
-series: C语言初阶笔记
+series: C语言学习笔记
 seriesOrder: 8
 draft: false
 ---

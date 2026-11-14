@@ -4,7 +4,7 @@ published: 2026-11-14
 description: 用礼品目录与红绿灯理解共享存储和有限状态，掌握联合体大小、枚举取值、标签校验及跨平台表示边界。
 tags: [C语言, 进阶, 联合体, 枚举]
 category: C语言
-series: C语言进阶笔记
+series: C语言学习笔记
 seriesOrder: 21
 draft: false
 ---

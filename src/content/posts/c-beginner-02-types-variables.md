@@ -4,7 +4,7 @@ published: 2026-11-14
 description: 用购物小票理解类型选择，梳理整数修饰符、类型大小、ASCII、转义字符、变量作用域和常量。
 tags: [C语言, 初阶, 数据类型]
 category: C语言
-series: C语言初阶笔记
+series: C语言学习笔记
 seriesOrder: 2
 draft: false
 ---

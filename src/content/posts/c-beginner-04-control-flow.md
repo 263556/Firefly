@@ -4,7 +4,7 @@ published: 2026-11-14
 description: 从成绩判断、闰年和素数出发，掌握 if、switch、短路、三种循环、break、continue、循环嵌套和 goto。
 tags: [C语言, 初阶, 流程控制]
 category: C语言
-series: C语言初阶笔记
+series: C语言学习笔记
 seriesOrder: 4
 draft: false
 ---

@@ -4,7 +4,7 @@ published: 2026-11-14
 description: 用运算分发表和 qsort 理解函数地址、typedef、函数指针数组、回调契约与按字节交换的通用排序。
 tags: [C语言, 进阶, 函数指针, 回调]
 category: C语言
-series: C语言进阶笔记
+series: C语言学习笔记
 seriesOrder: 16
 draft: false
 ---

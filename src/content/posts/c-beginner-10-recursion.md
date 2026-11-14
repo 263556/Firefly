@@ -4,7 +4,7 @@ published: 2026-11-14
 description: 通过阶乘、顺序打印数字、斐波那契、二分与汉诺塔理解递归，区分终止条件、问题规模和重复计算。
 tags: [C语言, 初阶, 递归]
 category: C语言
-series: C语言初阶笔记
+series: C语言学习笔记
 seriesOrder: 10
 draft: false
 ---

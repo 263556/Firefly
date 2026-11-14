@@ -4,7 +4,7 @@ published: 2026-11-14
 description: 用学生信息与通讯录理解结构体组合和自引用，实测 sizeof 与 offsetof，区分自然对齐、打包、位域和稳定数据格式。
 tags: [C语言, 进阶, 结构体, 内存对齐]
 category: C语言
-series: C语言进阶笔记
+series: C语言学习笔记
 seriesOrder: 20
 draft: false
 ---

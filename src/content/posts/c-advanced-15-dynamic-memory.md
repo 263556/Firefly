@@ -4,7 +4,7 @@ published: 2026-11-14
 description: 用可增长成绩表理解 malloc、calloc、realloc、free，建立容量检查与所有权规则，并实现柔性数组对象。
 tags: [C语言, 进阶, 动态内存]
 category: C语言
-series: C语言进阶笔记
+series: C语言学习笔记
 seriesOrder: 15
 draft: false
 ---

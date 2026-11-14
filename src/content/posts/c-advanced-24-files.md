@@ -4,7 +4,7 @@ published: 2026-11-14
 description: 系统梳理流与打开模式、字符和块读写、EOF、定位、更新流和缓冲，并实现二进制复制与通讯录文本保存读取。
 tags: [C语言, 进阶, 文件操作, 持久化]
 category: C语言
-series: C语言进阶笔记
+series: C语言学习笔记
 seriesOrder: 24
 draft: false
 ---
