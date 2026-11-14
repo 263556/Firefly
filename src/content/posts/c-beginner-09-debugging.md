@@ -9,7 +9,6 @@ seriesOrder: 9
 draft: false
 ---
 
-> 依据《（新 AI 版）鹏哥 C 语言课件》初阶第 9 讲整理。快捷键指 Visual Studio 默认常见配置，VS Code 的具体绑定取决于安装和设置。
 
 ## 1. 引入：能运行不等于算对
 
