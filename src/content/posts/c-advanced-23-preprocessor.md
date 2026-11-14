@@ -9,7 +9,6 @@ seriesOrder: 23
 draft: false
 ---
 
-> 依据鹏哥 C 语言进阶第 23 章整理。
 
 ## 1. 引入：SQUARE(a + 1) 为什么不是平方
 
