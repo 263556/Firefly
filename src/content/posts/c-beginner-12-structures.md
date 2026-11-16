@@ -1,186 +1,294 @@
 ---
 title: C语言初阶 12：用结构体描述复杂对象
 published: 2026-11-14
-description: 用学生记录理解结构体声明、变量初始化、整体赋值、点与箭头、值传参与指针传参，并完成成绩统计案例。
+description: 依照原课件逐节整理，完整保留代码示例、练习、对照实现与图表，精简重复说明并附易错点。
 tags: [C语言, 初阶, 结构体]
 category: C语言
 series: C语言学习笔记
 seriesOrder: 12
 draft: false
+updated: 2026-11-16
 ---
 
+> 本篇按《（新 AI 版）鹏哥 C 语言课件》第 12 章逐节整理。保留原课件代码、对照写法、练习及图表，仅压缩重复说明。
+> 代码块包含可运行实现、局部片段、输出、故意出错的示例与思考题；它们是独立示例，请结合上下文阅读，不能将整章拼成一个程序。
 
+## 阅读前先核对
 
-## 1. 引入：一个学生不只是一个分数
+- 结构体指针使用 `->`，普通结构体对象使用 `.`。结构体整体复制会复制数组成员，但指针成员只复制地址，不自动深拷贝。
 
-学生包含学号、姓名、成绩。把它们分别存在独立数组中，一旦排序或删除容易失去对应关系。结构体把相关但不同类型的成员组合成一个对象。
+## 本章目标
 
-```c
-struct Student {
-    int id;
-    char name[32];
-    double score;
-};
-```
+1. 掌握结构体类型的声明、变量的创建和赋值
 
-这里声明了结构体类型，没有创建学生对象。结束的分号不能漏。C 中使用该类型通常写 `struct Student`，只写 `Student` 需要另外用 `typedef` 定义别名。
+2. 掌握结构体成员访问的方法
 
-## 2. 创建变量与初始化
+3. 掌握结构体传参的代码编写
 
-```c
-struct Student first = {1001, "Lin", 92.5};
-struct Student second = {0};
-struct Student third = {
-    .id = 1003,
-    .name = "Chen",
-    .score = 87.0
-};
-```
+4. 为后续结构体进阶打好基础
 
-第一种按成员声明顺序初始化，第三种是 C99 起支持的指定成员初始化，可读性更好。`{0}` 将成员初始化为相应零值，字符数组元素也为 0。`struct Student student;` 若为自动局部对象且没有初始化，其成员不能假设为零。
+## 1. 结构体
 
-也可在类型声明后直接创建变量，但把类型与对象分开通常更便于复用。匿名结构体适合少量局部情形，不便于跨函数共享类型，不宜作为初学工程的主要接口。
+C语言已经提供了内置类型，如：char、short、int、long、float、double等，但是只有这些内置类型还是不够的，假设我想描述学生，描述一本书，这时单一的内置类型是不行的。
 
-## 3. 成员访问：点号与箭头
+- 描述一个学生需要名字、年龄、学号、身高、体重等；
 
-```c
-first.score = 95.0;
-printf("%d %s %.1f\n", first.id, first.name, first.score);
+- 描述一本书需要书名、作者、出版社、定价等；
 
-struct Student *p = &first;
-p->score = 96.0;
-printf("%.1f\n", p->score);
-```
+C语言为了解决这个问题，增加了结构体这种自定义的数据类型，让程序员可以自己创造适合的类型。
 
-结构体对象用 `.`，指向结构体的指针用 `->`。`p->score` 等价于 `(*p).score`；不能写 `*p.score`，因为成员访问的结合方式会改变表达式含义。
+📌 结构体是一些值的集合，这些值称为成员变量。
 
-需要多层访问时，按每一层实际类型选择操作符。嵌套结构体的成员访问并没有新规则，例如 `student.address.city`。
+结构体的每个成员可以是不同类型的变量，如：标量、数组、指针，甚至是其他结构体变量。
 
-## 4. 字符数组成员不能事后整体赋值
+数组也是一些值的集合，但是数组中每个元素的类型是相同的，这里可以和结构体做个对比。
+
+### 1.1 结构体类型声明
+
+**课件代码 12-001 · PDF 第 1 页**
 
 ```c
-// 错误：first.name = "Wang";
-```
-
-数组初始化和赋值是两回事。创建时可以用字符串初始化数组，创建后不能用 `=` 替换整个数组。可以在确认容量足够后复制内容。
-
-```c
-#include <string.h>
-
-const char new_name[] = "Wang";
-memcpy(first.name, new_name, sizeof new_name);
-```
-
-这里 `sizeof new_name` 包含终止符，且显然不超过 32。实际处理任意外部姓名时，应先检查字节长度或使用受控格式化，不能把这个固定短字符串例子推广为“不检查也安全”。UTF-8 中文姓名同样要按字节容量考虑。
-
-## 5. 结构体可整体赋值，但不等于深拷贝
-
-```c
-struct Student backup = first;
-backup.score = 60.0;
-```
-
-同一结构体类型的对象可以整体复制，`backup.name` 的数组成员也被复制，改 `backup.score` 不影响 `first.score`。这与数组本身不能整体赋值不同。
-
-如果成员含指针，复制的是指针值，两个对象可能仍指向同一份外部数据：
-
-```c
-struct View {
-    int *data;
-};
-int number = 10;
-struct View a = {&number};
-struct View b = a;
-*b.data = 20; // number 也变成 20
-```
-
-所以整体赋值不自动复制指针指向的内容。数据由谁拥有、何时有效，仍要单独设计。
-
-结构体不能用 `==` 逐成员比较；也不要用 `memcmp` 代替逻辑相等，因为填充字节和浮点表示等细节可能干扰比较。按需要比较各个成员。
-
-## 6. 结构体传参：复制对象还是传地址
-
-```c
-void set_score_wrong(struct Student student, double score)
+struct tag
 {
-    student.score = score; // 只修改副本
-}
-
-void set_score(struct Student *student, double score)
-{
-    student->score = score; // 修改调用者的对象
-}
+    member-list;
+} variable-list;
 ```
 
-调用分别为 `set_score_wrong(first, 80.0)` 和 `set_score(&first, 80.0)`。结构体可以按值传参和返回，语义很清楚；较大对象或需要修改原对象时适合传指针。只读函数常写 `const struct Student *`，表达不会通过该参数修改对象。
+描述一个学生：
 
-传指针并不自动更安全，仍需保证地址非空、对象有效。选择接口时优先看语义，再考虑复制成本。
-
-## 7. 完整案例：学生成绩列表与最高分
+**课件代码 12-002 · PDF 第 2 页**
 
 ```c
-#include <stdio.h>
-#include <stddef.h>
+struct Stu
+{
+    char name[20];//名字
+    int age;//年龄
+    char sex[5];//性别
+    char id[20];//学号
+}; //分号不能丢
+```
 
-struct Student {
-    int id;
-    char name[32];
-    double score;
+### 1.2 结构体变量的定义
+
+方式1 方式2
+
+**课件代码 12-003 · PDF 第 2 页**
+
+```c
+struct Stu
+{
+    char name[20];//名字
+    int age;//年龄
+    char sex[5];//性别
+    char id[20];//学号
+} s1, s2, s3; //全局变量
+```
+
+**课件代码 12-004 · PDF 第 2 页**
+
+```c
+struct Stu
+{
+    char name[20];//名字
+    int age;//年龄
+    char sex[5];//性别
+    char id[20];//学号
 };
 
-static void print_student(const struct Student *student)
-{
-    printf("%d %-8s %.1f\n", student->id, student->name, student->score);
-}
+struct Stu s1;//全局变量
 
-/* 空列表返回 NULL；非空时返回原数组中的最高分对象地址。 */
-static const struct Student *find_top(const struct Student data[], size_t count)
+int main()
 {
-    if (count == 0) {
-        return NULL;
-    }
-    const struct Student *top = &data[0];
-    for (size_t i = 1; i < count; ++i) {
-        if (data[i].score > top->score) {
-            top = &data[i];
-        }
-    }
-    return top;
-}
+    struct Stu s2; //局部变量
 
-int main(void)
-{
-    struct Student students[] = {
-        {1001, "Lin", 92.5},
-        {1002, "Wang", 86.0},
-        {1003, "Chen", 95.0}
-    };
-    size_t count = sizeof students / sizeof students[0];
-    for (size_t i = 0; i < count; ++i) {
-        print_student(&students[i]);
-    }
-    const struct Student *top = find_top(students, count);
-    if (top != NULL) {
-        puts("最高分：");
-        print_student(top);
-    }
     return 0;
 }
 ```
 
-最高分相同时保留先出现的学生。函数返回的是原数组元素的地址，调用者使用它时数组必须仍然存活；这里数组在 `main` 中，使用期间有效。不要改成返回函数内部局部 `struct Student` 对象的地址。
+对于结构体变量的创建更推荐方式2，这样更加灵活。
 
-## 8. 大小与内存布局的初步认识
+结构体类型和结构体变量的关系，就是设计图纸和真实建筑物的关系。
 
-结构体的 `sizeof` 不一定等于各成员大小相加，编译器可能插入填充满足对齐要求。可以用 `sizeof(struct Student)` 观察总大小，使用 `<stddef.h>` 的 `offsetof` 查询成员偏移，不要靠猜测字节偏移读写成员。
+![第12章第3页配图](/images/c-language-course/12-p03-fig01.png)
 
-初阶先掌握通过成员名访问；布局、对齐以及文件序列化留待进阶。直接把结构体内存写入文件，也不能自动成为跨平台稳定的数据格式。
+### 1.3 结构体变量的初始化
 
-## 9. 自测与综合练习
+结构体变量中包含了多个成员，初始化的时候也使用 {} 把初始化的值括起来的。
 
-1. 解释 `student.score`、`p->score`、`(*p).score` 各自要求的类型。
-2. 给学生添加班级字段，更新初始化和输出函数，检查接口是否集中修改。
-3. 编写只读的平均分函数，明确空列表的结果或失败返回方式。
-4. 给列表按成绩排序，交换完整结构体，避免只交换分数而使姓名与成绩错位。
+**课件代码 12-005 · PDF 第 3,4 页**
 
-到这里，数组负责组织多个同类对象，结构体描述一个对象的多个字段，函数组织行为，指针描述访问关系。这四者结合，就能开始设计通讯录、学生管理和棋盘游戏等小程序。
+```c
+#include <stdio.h>
+
+struct Stu
+{
+    char name[20];//名字
+    int age;//年龄
+    char sex[5];//性别
+    char id[20];//学号
+};
+
+int main()
+{
+    //按照结构体成员的顺序初始化
+    struct Stu s1 = { "张三", 20, "男", "202818001" };
+
+    //按照指定的顺序初始化
+    struct Stu s2 = { .age = 18, .name = "lisi", .id = "202818002", .sex = "女" };
+
+    //不完全初始化
+    struct Stu s3 = {"lisi", 18}; //剩余初始化的成员默认都是0
+
+    return 0;
+}
+```
+
+### 1.4 结构体变量的赋值
+
+数组是不能整体赋值的，但是结构体变量是可以整体赋值的。
+
+**课件代码 12-006 · PDF 第 4 页**
+
+```c
+//代码1
+int main()
+{
+    int arr1[10] = {1,2,3,4,5,6,7,8,9,10};
+    int arr2[10] = {0};
+    arr2 = arr1;//err
+
+    return 0;
+}
+
+//代码2
+struct Stu
+{
+    char name[20];//名字
+    int age;//年龄
+    char sex[5];//性别
+    char id[20];//学号
+};
+
+int main()
+{
+    struct Stu s1 = { "张三", 20, "男", "202818001" };
+    struct Stu s2 = {0};
+    s2 = s1; //ok
+    struct Stu s3 = s2; //ok
+    return 0;
+}
+```
+
+## 2. 结构成员访问操作符
+
+### 2.1 结构体成员的直接访问
+
+结构体成员的直接访问是通过点操作符（.）访问的；点操作符接受两个操作数。如下所示：
+
+**课件代码 12-007 · PDF 第 5 页**
+
+```c
+#include <stdio.h>
+
+struct Stu
+{
+    char name[20];//名字
+    int age;//年龄
+    char sex[5];//性别
+    char id[20];//学号
+};
+
+int main()
+{
+    struct Stu s = { "张三", 20, "男", "20230818001" };
+    s.age = 18;
+    printf("name: %s\n", s.name);
+    printf("age : %d\n", s.age);
+    printf("sex : %s\n", s.sex);
+    printf("id  : %s\n", s.id);
+    return 0;
+}
+```
+
+使用方式：结构体变量.成员名
+
+### 2.2 结构体成员的间接访问
+
+有时候我们得到的不是一个结构体变量，而是得到了一个指向结构体的指针。如下所示：
+
+**课件代码 12-008 · PDF 第 5,6 页**
+
+```c
+#include <stdio.h>
+struct Stu
+{
+    char name[20];//名字
+    int age;//年龄
+    char sex[5];//性别
+    char id[20];//学号
+};
+
+int main()
+{
+    struct Stu s = { "张三", 20, "男", "20230818001" };
+    struct Stu *ps = &s;
+    printf("name: %s\n", ps->name);
+    printf("age : %d\n", ps->age);
+    printf("sex : %s\n", ps->sex);
+    printf("id  : %s\n", ps->id);
+    return 0;
+}
+```
+
+使用方式：结构体指针-&gt;成员名
+
+## 3. 结构体传参
+
+在使用结构体的时候，经常会涉及到结构体传参，也就是将一个结构体的信息传递给某个函数。
+
+结构体传参的时候，可以传递结构体变量，也可以传递结构体变量的地址。
+
+请看下面的例子：
+
+**课件代码 12-009 · PDF 第 6 页**
+
+```c
+struct S
+{
+    int data[1000];
+    int num;
+};
+
+struct S s = {{1,2,3,4}, 1000};
+//结构体传参
+void print1(struct S s)
+{
+    printf("%d\n", s.num);
+}
+//结构体地址传参
+void print2(struct S* ps)
+{
+    printf("%d\n", ps->num);
+}
+
+int main()
+{
+    print1(s);  //传结构体
+    print2(&s); //传地址
+    return 0;
+}
+```
+
+上面的 print1 和 print2 函数哪个好些？
+
+答案是：首选print2函数。
+
+原因：
+
+函数传参的时候，参数是需要压栈，会有时间和空间上的系统开销。
+
+如果传递一个结构体对象的时候，结构体过大，参数压栈的的系统开销比较大，所以会导致性能的下降。
+
+结论：结构体传参的时候，要传结构体的地址。
+
+更多关于结构体的知识，后期在《第20讲：结构体进阶》中讲解。
